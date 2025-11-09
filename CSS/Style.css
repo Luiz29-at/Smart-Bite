@@ -1,66 +1,128 @@
-body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ff8a00, #e52e71);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+/* ==============================
+   SmartBite — Tema Global Escuro
+   ============================== */
+
+/* Reset */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
+/* Fundo e cores */
+body {
+  background: #0f0f0f;
+  color: #eaeaea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Container principal */
 .container {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 380px;
-  text-align: center;
-  box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Título */
 h1 {
-  margin-bottom: 10px;
-  font-size: 26px;
+  font-size: 2rem;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 25px;
 }
 
-h2 {
-  margin-bottom: 20px;
-  font-weight: 400;
+h1 span {
+  color: #00ff9d;
 }
 
-input {
-  width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
+/* Campos de formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, select {
+  background: #121212;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
   outline: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
+input:focus, select:focus {
+  border-color: #00ff9d;
+  box-shadow: 0 0 5px #00ff9d50;
+}
+
+/* Botões */
 button {
-  width: 100%;
-  padding: 10px;
-  background: #fff;
-  color: #e52e71;
+  background: #00ff9d;
+  color: #000;
   border: none;
-  border-radius: 10px;
+  padding: 12px;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
+  transition: all 0.2s ease;
 }
 
 button:hover {
-  background: #ff8a00;
-  color: #fff;
+  background: #00cc7a;
+  transform: scale(1.02);
 }
 
-.link a {
-  color: #fff;
+/* Links */
+a {
+  color: #00ff9d;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+a:hover {
   text-decoration: underline;
 }
 
-#msg {
-  margin-top: 10px;
-  font-weight: bold;
+/* Texto inferior */
+.footer-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  button, input {
+    font-size: 0.9rem;
+  }
 }
