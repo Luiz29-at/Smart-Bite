@@ -1,175 +1,27 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Bite 🍽️ – Login</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartBite - Login</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="login-container">
-    <div class="card">
-      <h1>Smart Bite</h1>
-      <p class="subtitle">Acesse seu restaurante</p>
+  <div class="container">
+    <h1>SmartBite 🍽️</h1>
+    <h2>Login do Restaurante</h2>
 
-      <input type="email" id="email" placeholder="E-mail" />
-      <input type="password" id="senha" placeholder="Senha" />
+    <input type="email" id="email" placeholder="E-mail">
+    <input type="password" id="senha" placeholder="Senha">
 
-      <button id="btnLogin">Entrar 🍽️</button>
-      <a href="cadastro.html" class="link">Não tem conta? Cadastre-se</a>
+    <button id="btnLogin">Entrar</button>
+    <p id="msg"></p>
 
-      <p id="msg"></p>
-    </div>
+    <p class="link">Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
   </div>
 
-  <script src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
+  <script src="js/main.js"></script>
 </body>
-</html><style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #0d1117, #161b22);
-  color: #f1f1f1;
-}
-
-.login-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card {
-  background: #1e242e;
-  padding: 2rem;
-  border-radius: 1.5rem;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.6);
-  animation: fadeIn 0.5s ease;
-  text-align: center;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-h1 {
-  margin-bottom: 0.3rem;
-  font-weight: 600;
-  color: #00d68f;
-}
-
-.subtitle {
-  font-size: 0.95rem;
-  color: #aaa;
-  margin-bottom: 1.5rem;
-}
-
-input {
-  width: 100%;
-  padding: 0.8rem;
-  margin: 0.4rem 0;
-  border: none;
-  border-radius: 8px;
-  background: #2a303c;
-  color: #fff;
-  font-size: 1rem;
-}
-
-input:focus {
-  outline: 2px solid #00d68f;
-}
-
-button {
-  width: 100%;
-  padding: 0.9rem;
-  border: none;
-  border-radius: 10px;
-  background: #00d68f;
-  color: #000;
-  font-weight: 600;
-  font-size: 1rem;
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #00b87a;
-}
-
-.link {
-  color: #00d68f;
-  text-decoration: none;
-  display: block;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-}
-
-#msg {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #ff6b6b;
-}</style><script>// --- Configuração Firebase ---
-const firebaseConfig = {
-  apiKey: "AIzaSyB83kRUQb-V8SgppM1m_idpqSSarVocvU0",
-  authDomain: "smart-bite-879c1.firebaseapp.com",
-  projectId: "smart-bite-879c1",
-  storageBucket: "smart-bite-879c1.firebasestorage.app",
-  messagingSenderId: "886687766123",
-  appId: "1:886687766123:web:8ab31d776e88671ade032e",
-  measurementId: "G-6DVX4M4HMS"
-};
-firebase.initializeApp(firebaseConfig);
-
-const auth = firebase.auth();
-const msg = document.getElementById('msg');
-const btnLogin = document.getElementById('btnLogin');
-
-btnLogin.addEventListener('click', async () => {
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('senha').value;
-
-  if (!email || !senha) {
-    msg.textContent = "Preencha todos os campos.";
-    return;
-  }
-
-  msg.textContent = "Entrando...";
-  msg.style.color = "#ccc";
-
-  try {
-    await auth.signInWithEmailAndPassword(email, senha);
-    msg.textContent = "✅ Login realizado com sucesso!";
-    msg.style.color = "#00d68f";
-    setTimeout(() => {
-      window.location.href = "painel.html";
-    }, 1000);
-  } catch (err) {
-    msg.textContent = "❌ " + traduzErro(err.code);
-    msg.style.color = "#ff6b6b";
-  }
-});
-
-function traduzErro(codigo) {
-  switch (codigo) {
-    case 'auth/invalid-email': return 'E-mail inválido.';
-    case 'auth/user-not-found': return 'Usuário não encontrado.';
-    case 'auth/wrong-password': return 'Senha incorreta.';
-    default: return 'Erro ao entrar. Tente novamente.';
-  }
-}</script>
+</html>
